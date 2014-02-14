@@ -6,9 +6,6 @@ from .form_fields import ArrowField as ArrowFormField
 class ArrowField(DateTimeField):
     __metaclass__ = SubfieldBase
 
-    def get_internal_type(self):
-        return "ArrowField"
-
     def to_python(self, value):
         if isinstance(value, arrow.Arrow):
             return value
