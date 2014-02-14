@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-arrow-field',
-    version='0.1.0',
+    version='0.1.1',
     description='Django arrow datetime field',
     author='Gizmag',
     author_email='tech@gizmag.com',
