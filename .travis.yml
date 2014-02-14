@@ -14,4 +14,4 @@ install:
     - pip install -q nose django-nose Django==$DJANGO_VERSION
     - pip install .
 
-script: ./runtests.py
+script: python runtests.py
