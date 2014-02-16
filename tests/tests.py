@@ -1,6 +1,7 @@
 import arrow
 from dateutil import tz
 from django.test import TestCase
+from django.core import serializers
 from arrow_field.model_fields import ArrowField
 
 from .models import Person, PersonAutoNow, PersonAutoNowAdd
@@ -70,3 +71,9 @@ class ArrowModelFieldTests(TestCase):
             Person.objects.filter(birthday__year=2001).count(),
             0
         )
+
+    def test_arrowfield_serializes_correctly(self):
+        data = serializers.serialize("json", Person.objects.all())
+        result = list(serializers.deserialize("json", data))
+        self.assertEqual(result[0].object.birthday, arrow.get(2000, 6, 1))
+
