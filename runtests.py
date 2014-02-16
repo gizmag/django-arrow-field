@@ -17,6 +17,10 @@ if not settings.configured:
             'tests',
         ),
         TEST_RUNNER='django_nose.NoseTestSuiteRunner',
+        NOSE_ARGS = [
+            '--cover-package=arrow_field',
+            '--with-coverage',
+        ]
     )
 
 
