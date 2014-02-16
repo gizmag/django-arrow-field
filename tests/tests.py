@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import arrow
 from dateutil import tz
 from django.test import TestCase

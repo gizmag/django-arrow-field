@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import arrow
 from django.db.models import DateTimeField, SubfieldBase
 from .form_fields import ArrowField as ArrowFormField

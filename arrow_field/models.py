@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import arrow
 from django.db import models
 from .model_fields import ArrowField
