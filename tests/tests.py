@@ -3,8 +3,12 @@ import arrow
 from dateutil import tz
 from django.test import TestCase
 from django.core import serializers
-from arrow_field.model_fields import ArrowField
 
+from arrow_field.model_fields import ArrowField
+from arrow_field.form_fields import ArrowField as ArrowFormField
+
+
+from .forms import PersonForm
 from .models import Person, PersonAutoNow, PersonAutoNowAdd
 
 
@@ -78,3 +82,26 @@ class ArrowModelFieldTests(TestCase):
         result = list(serializers.deserialize("json", data))
         self.assertEqual(result[0].object.birthday, arrow.get(2000, 6, 1))
 
+
+class ArrowFormFieldTests(TestCase):
+    def setUp(self):
+        self.person = Person.objects.create(
+            first_name='John',
+            birthday=arrow.get(2000, 6, 1),
+        )
+        self.form = PersonForm(instance=self.person)
+
+    def test_arrow_form_field_automatically_used_on_modelform(self):
+        self.assertEqual(self.form.fields['birthday'].__class__, ArrowFormField)
+
+    def test_form_renders_correctly(self):
+        # should not except
+        self.form.as_p()
+
+    def test_form_strptime_works(self):
+        date_string = arrow.get(2010, 6, 1).format('YYYY-MM-DD HH:mm:ss')
+        print date_string
+        form = PersonForm({'first_name': 'Greg', 'birthday': date_string}, instance=self.person)
+        # import ipdb; ipdb.set_trace()
+        self.assertTrue(form.is_valid())
+        self.assertEqual(form.cleaned_data['birthday'], arrow.get(2010, 6, 1))
