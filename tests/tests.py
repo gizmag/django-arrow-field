@@ -8,7 +8,7 @@ from arrow_field.model_fields import ArrowField
 from arrow_field.form_fields import ArrowField as ArrowFormField
 
 
-from .forms import PersonForm
+from .forms import PersonForm, ISO8601PersonForm
 from .models import Person, PersonAutoNow, PersonAutoNowAdd
 
 
@@ -101,5 +101,11 @@ class ArrowFormFieldTests(TestCase):
     def test_form_strptime_works(self):
         date_string = arrow.get(2010, 6, 1).format('YYYY-MM-DD HH:mm:ss')
         form = PersonForm({'first_name': 'Greg', 'birthday': date_string}, instance=self.person)
+        self.assertTrue(form.is_valid())
+        self.assertEqual(form.cleaned_data['birthday'], arrow.get(2010, 6, 1))
+
+    def test_iso8601_form_field_works(self):
+        date_string = arrow.get(2010, 6, 1).isoformat()
+        form = ISO8601PersonForm({'first_name': 'Greg', 'birthday': date_string}, instance=self.person)
         self.assertTrue(form.is_valid())
         self.assertEqual(form.cleaned_data['birthday'], arrow.get(2010, 6, 1))
