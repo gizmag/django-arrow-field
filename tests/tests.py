@@ -100,8 +100,6 @@ class ArrowFormFieldTests(TestCase):
 
     def test_form_strptime_works(self):
         date_string = arrow.get(2010, 6, 1).format('YYYY-MM-DD HH:mm:ss')
-        print date_string
         form = PersonForm({'first_name': 'Greg', 'birthday': date_string}, instance=self.person)
-        # import ipdb; ipdb.set_trace()
         self.assertTrue(form.is_valid())
         self.assertEqual(form.cleaned_data['birthday'], arrow.get(2010, 6, 1))
