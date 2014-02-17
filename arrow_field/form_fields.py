@@ -26,7 +26,7 @@ class ArrowField(DateTimeField):
 
     def to_python(self, value):
         if isinstance(value, arrow.Arrow):
-                value.to(timezone.get_current_timezone())
+            value.to(timezone.get_current_timezone())
             return value
         return super(ArrowField, self).to_python(value)
 
