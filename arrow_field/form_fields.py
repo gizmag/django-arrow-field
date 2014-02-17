@@ -23,3 +23,11 @@ class ArrowField(DateTimeField):
 
     def strptime(self, value, format):
         return arrow.get(value, format)
+
+
+class ISO8601ArrowField(ArrowField):
+    input_formats = ['iso-8601']
+
+    def strptime(self, value, format):
+        if format == 'iso-8601':
+            return arrow.get(value)
