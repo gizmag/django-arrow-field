@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/gizmag/django-arrow-field.png?branch=master)](https://travis-ci.org/gizmag/django-arrow-field)
 [![Code Health](https://landscape.io/github/gizmag/django-arrow-field/master/landscape.png)](https://landscape.io/github/gizmag/django-arrow-field/master)
 
+### NOTE: This was an experiment in creating custom model fields, and we are not using this in production.
+
 Django Arrow Field is a custom model field that represents dates stored in the
 database as `Arrow` instances instead of `datetime`'s.
 [Arrow](http://crsmithdev.com/arrow/) is a wonderful datetime library with a
